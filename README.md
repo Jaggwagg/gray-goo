@@ -1,6 +1,7 @@
 # Gray Goo Mod
 
 A Minecraft mod which adds destructive nanotechnology! This mod adds machines, blocks, and items to DESTROY your world!
+Fabric only for now.
 
 ## Testing Environment
 * OS: Arch Linux
@@ -9,10 +10,11 @@ A Minecraft mod which adds destructive nanotechnology! This mod adds machines, b
 ## Dependencies
 * Gradle
 * JDK 17 or greater
+
 ## Compiling and Running
 
 ```shell
-git clone https://github.com/jaggwagg/gray-goo.git
+git clone https://github.com/Jaggwagg/gray-goo.git
 ```
 
 For setup instructions please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using.

@@ -9,11 +9,12 @@
     "Jaggwagg"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://github.com/Jaggwagg/gray-goo",
+    "sources": "https://github.com/Jaggwagg/gray-goo.git",
+    "issues": "https://github.com/Jaggwagg/gray-goo/issues"
   },
 
-  "license": "CC0-1.0",
+  "license": "MIT",
   "icon": "assets/gray_goo/icon.png",
 
   "environment": "*",

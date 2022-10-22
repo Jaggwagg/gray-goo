@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "n": {
+      "item": "gray_goo:nanite_trait"
+    },
+    "r": {
+      "item": "minecraft:redstone"
+    },
+    "l": {
+      "item": "gray_goo:molecular_logic_gate"
+    },
+    "R": {
+      "item": "gray_goo:molecular_replicator"
+    }
+  },
+  "pattern": [
+    "rlr",
+    "RnR",
+    "rlr"
+  ],
+  "result": {
+    "item": "gray_goo:gray_goo"
+  }
+}

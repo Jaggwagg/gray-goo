@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "n": {
+      "item": "gray_goo:nanite_trait"
+    },
+    "g": {
+      "item": "minecraft:gunpowder"
+    },
+    "r": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "pattern": [
+    " g ",
+    "rnr",
+    " g "
+  ],
+  "result": {
+    "item": "gray_goo:explosive_nanite_trait"
+  }
+}

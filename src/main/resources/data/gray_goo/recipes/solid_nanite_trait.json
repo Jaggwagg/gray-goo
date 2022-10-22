@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "n": {
+      "item": "gray_goo:nanite_trait"
+    },
+    "s": {
+      "item": "minecraft:stone"
+    },
+    "r": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "pattern": [
+    " s ",
+    "rnr",
+    " s "
+  ],
+  "result": {
+    "item": "gray_goo:solid_nanite_trait"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "i": {
+      "item": "minecraft:iron_ingot"
+    },
+    "r": {
+      "item": "gray_goo:molecular_replicator"
+    },
+    "l": {
+      "item": "gray_goo:molecular_logic_gate"
+    },
+    "s": {
+      "item": "gray_goo:molecular_switch"
+    }
+  },
+  "pattern": [
+    "isi",
+    "rlr",
+    "isi"
+  ],
+  "result": {
+    "item": "gray_goo:nanite_trait",
+    "count": 4
+  }
+}

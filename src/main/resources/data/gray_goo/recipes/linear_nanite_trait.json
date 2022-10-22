@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "n": {
+      "item": "gray_goo:nanite_trait"
+    },
+    "b": {
+      "item": "minecraft:iron_bars"
+    }
+  },
+  "pattern": [
+    " b ",
+    "bnb",
+    " b "
+  ],
+  "result": {
+    "item": "gray_goo:linear_nanite_trait"
+  }
+}

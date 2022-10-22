@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "gray_goo",
+  "version": "${version}",
+
+  "name": "Gray Goo",
+  "description": "A mod which adds destructive nanotechnology into Minecraft!",
+  "authors": [
+    "Jaggwagg"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/gray_goo/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "jaggwagg.gray_goo.GrayGoo"
+    ],
+    "client": [
+      "jaggwagg.gray_goo.client.GrayGooClient"
+    ]
+  },
+  "mixins": [
+    "gray_goo.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.9",
+    "fabric-api": "*",
+    "minecraft": "~1.19",
+    "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}

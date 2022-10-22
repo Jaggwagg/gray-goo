@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "r": {
+      "item": "minecraft:redstone"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "iri",
+    "rrr",
+    "iri"
+  ],
+  "result": {
+    "item": "gray_goo:molecular_logic_gate",
+    "count": 4
+  }
+}

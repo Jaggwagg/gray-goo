@@ -1,0 +1,22 @@
+{
+  "container.gray_goo.nanite_modifier": "Nanite Modifier",
+  "block.gray_goo.gray_goo": "Gray Goo",
+  "block.gray_goo.nanite_modifier": "Nanite Modifier",
+  "item.gray_goo.molecular_logic_gate": "Molecular Logic Gate",
+  "item.gray_goo.molecular_motor": "Molecular Motor",
+  "item.gray_goo.molecular_propeller": "Molecular Propeller",
+  "item.gray_goo.molecular_replicator": "Molecular Replicator",
+  "item.gray_goo.molecular_switch": "Molecular Switch",
+  "item.gray_goo.nanite_trait": "Nanite Trait",
+  "item.gray_goo.biological_nanite_trait": "Biological Nanite Trait",
+  "item.gray_goo.broken_nanite_trait": "Broken Nanite Trait",
+  "item.gray_goo.corrupted_nanite_trait": "Corrupted Nanite Trait",
+  "item.gray_goo.explosive_nanite_trait": "Explosive Nanite Trait",
+  "item.gray_goo.fluid_nanite_trait": "Fluid Nanite Trait",
+  "item.gray_goo.gravitational_nanite_trait": "Gravitational Nanite Trait",
+  "item.gray_goo.linear_nanite_trait": "Linear Nanite Trait",
+  "item.gray_goo.rapid_nanite_trait": "Rapid Nanite Trait",
+  "item.gray_goo.solid_nanite_trait": "Solid Nanite Trait",
+  "item.gray_goo.tainted_nanite_trait": "Tainted Nanite Trait",
+  "itemGroup.gray_goo.general": "Gray Goo"
+}

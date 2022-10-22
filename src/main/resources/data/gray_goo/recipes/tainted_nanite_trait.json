@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "n": {
+      "item": "gray_goo:nanite_trait"
+    },
+    "s": {
+      "item": "minecraft:spider_eye"
+    },
+    "f": {
+      "item": "minecraft:rotten_flesh"
+    }
+  },
+  "pattern": [
+    " s ",
+    "fnf",
+    " s "
+  ],
+  "result": {
+    "item": "gray_goo:tainted_nanite_trait"
+  }
+}

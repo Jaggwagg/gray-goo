@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "n": {
+      "item": "gray_goo:nanite_trait"
+    },
+    "l": {
+      "item": "minecraft:lava_bucket"
+    },
+    "w": {
+      "item": "minecraft:water_bucket"
+    }
+  },
+  "pattern": [
+    "   ",
+    "lnw",
+    "   "
+  ],
+  "result": {
+    "item": "gray_goo:fluid_nanite_trait"
+  }
+}

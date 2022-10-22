@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "r": {
+      "item": "minecraft:redstone"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    },
+    "l": {
+      "item": "minecraft:lever"
+    }
+  },
+  "pattern": [
+    " i ",
+    "rlr",
+    " i "
+  ],
+  "result": {
+    "item": "gray_goo:molecular_switch",
+    "count": 4
+  }
+}

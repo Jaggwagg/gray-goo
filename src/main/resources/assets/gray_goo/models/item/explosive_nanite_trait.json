@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "gray_goo:item/explosive_nanite_trait"
+  }
+}

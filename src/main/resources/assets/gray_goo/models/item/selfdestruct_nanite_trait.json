@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "gray_goo:item/gravitational_nanite_trait"
+    "layer0": "gray_goo:item/selfdestruct_nanite_trait"
   }
 }

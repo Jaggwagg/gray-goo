@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "gray_goo:block/nanite_modifier_bottom",
+    "east": "gray_goo:block/nanite_modifier_side",
+    "north": "gray_goo:block/nanite_modifier_side",
+    "particle": "gray_goo:block/nanite_modifier_side",
+    "south": "gray_goo:block/nanite_modifier_side",
+    "up": "gray_goo:block/emp_switch_top",
+    "west": "gray_goo:block/nanite_modifier_side"
+  }
+}

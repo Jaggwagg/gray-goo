@@ -4,25 +4,26 @@ import jaggwagg.gray_goo.block.GrayGooBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.Packet;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.util.math.BlockPos;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class GrayGooBlockEntity extends BlockEntity {
     private int age = 0;
     private int growthSize = 2;
-    private NbtCompound traits = new NbtCompound();
-
+    private Map<String, Boolean> traits = new HashMap<>();
     public static ArrayList<String> traitKeys = new ArrayList<>(List.of(
             "biological", "broken", "corrupted", "explosive", "fluid",
-            "gravitational", "linear", "rapid", "solid", "tainted"
+            "linear", "rapid", "selfdestruct", "solid", "tainted"
     ));
 
     public GrayGooBlockEntity(BlockPos pos, BlockState state) {
         super(GrayGooBlocks.GRAY_GOO_BLOCK_ENTITY, pos, state);
 
-        traitKeys.forEach(key -> this.traits.putBoolean("key", false));
+        this.resetAllTraits();
     }
 
     public int getGrowthSize() {
@@ -30,31 +31,46 @@ public class GrayGooBlockEntity extends BlockEntity {
     }
 
     public boolean getTrait(String key) {
-        return this.traits.getBoolean(key);
+        return this.traits.get(key);
     }
 
-    public NbtCompound getAllTraits() {
+    public Map<String, Boolean> getAllTraits() {
         return this.traits;
     }
 
-    public void setAllTraits(NbtCompound traits) {
+    public void setAllTraits(Map<String, Boolean> traits) {
         this.traits = traits;
     }
 
-    @Override
-    public void readNbt(NbtCompound tag) {
-        super.readNbt(tag);
-        age = tag.getInt("age");
-        growthSize = tag.getInt("growthSize");
-        traits = tag.getCompound("traits");
+    public void resetAllTraits() {
+        traitKeys.forEach(key -> this.traits.put(key, false));
     }
 
     @Override
-    public void writeNbt(NbtCompound tag) {
-        tag.putInt("age", age);
-        tag.putInt("growthSize", growthSize);
-        tag.put("traits", traits);
+    public void readNbt(NbtCompound nbt) {
+        super.readNbt(nbt);
+        age = nbt.getInt("age");
+        growthSize = nbt.getInt("growthSize");
 
-        super.writeNbt(tag);
+        traitKeys.forEach(key -> this.traits.put(key, nbt.getBoolean(key)));
+    }
+
+    @Override
+    public void writeNbt(NbtCompound nbt) {
+        nbt.putInt("age", age);
+        nbt.putInt("growthSize", growthSize);
+        traits.forEach(nbt::putBoolean);
+
+        super.writeNbt(nbt);
+    }
+
+    @Override
+    public Packet<ClientPlayPacketListener> toUpdatePacket() {
+        return BlockEntityUpdateS2CPacket.create(this);
+    }
+
+    @Override
+    public NbtCompound toInitialChunkDataNbt() {
+        return createNbt();
     }
 }

@@ -27,6 +27,7 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.explosion.Explosion;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -58,7 +59,13 @@ public class GrayGooBlock extends Block implements BlockEntityProvider {
 
             if (grayGooBlockEntity.getTrait("solid")) {
                 blocks.addAll(Arrays.asList(Blocks.SANDSTONE, Blocks.SAND, Blocks.GRAVEL, Blocks.STONE, Blocks.ANDESITE, Blocks.DIORITE, Blocks.GRANITE,
-                        Blocks.DEEPSLATE, Blocks.NETHERRACK, Blocks.BLACKSTONE, Blocks.BASALT));
+                        Blocks.DEEPSLATE, Blocks.NETHERRACK, Blocks.BLACKSTONE, Blocks.BASALT, Blocks.TUFF,
+                        Blocks.COPPER_ORE, Blocks.COAL_ORE, Blocks.IRON_ORE, Blocks.GOLD_ORE, Blocks.DIAMOND_ORE, Blocks.REDSTONE_ORE, Blocks.EMERALD_ORE, Blocks.LAPIS_ORE, Blocks.ANCIENT_DEBRIS,
+                        Blocks.DEEPSLATE_COPPER_ORE, Blocks.DEEPSLATE_COAL_ORE, Blocks.DEEPSLATE_IRON_ORE, Blocks.DEEPSLATE_GOLD_ORE, Blocks.DEEPSLATE_DIAMOND_ORE, Blocks.DEEPSLATE_REDSTONE_ORE, Blocks.DEEPSLATE_EMERALD_ORE, Blocks.DEEPSLATE_LAPIS_ORE));
+            }
+
+            if (grayGooBlockEntity.getTrait("selfdestruct")) {
+                blocks.add(GrayGooBlocks.Blocks.GRAY_GOO.block);
             }
 
             if (grayGooBlockEntity.getTrait("linear")) {
@@ -71,6 +78,7 @@ public class GrayGooBlock extends Block implements BlockEntityProvider {
                         int index = ((i & 1) == 0) ? i + 1 : i - 1;
 
                         if (blocks.contains(world.getBlockState(growableBlocks.get(index)).getBlock())) {
+                            world.setBlockState(growableBlocks.get(index), Blocks.AIR.getDefaultState());
                             world.setBlockState(growableBlocks.get(index), this.getDefaultState().with(ACTIVATED, true));
                             world.setBlockState(pos, this.getDefaultState().with(ACTIVATED, true));
 
@@ -84,16 +92,15 @@ public class GrayGooBlock extends Block implements BlockEntityProvider {
                 }
             } else {
                 for (BlockPos blockPos : positions) {
-                    if (!world.getBlockState(blockPos).getBlock().equals(this)) {
-                        if (blocks.contains(world.getBlockState(blockPos).getBlock())) {
-                            world.setBlockState(blockPos, this.getDefaultState().with(ACTIVATED, true));
-                            world.setBlockState(pos, this.getDefaultState().with(ACTIVATED, true));
+                    if (blocks.contains(world.getBlockState(blockPos).getBlock())) {
+                        world.setBlockState(blockPos, Blocks.AIR.getDefaultState());
+                        world.setBlockState(blockPos, this.getDefaultState().with(ACTIVATED, true));
+                        world.setBlockState(pos, this.getDefaultState().with(ACTIVATED, true));
 
-                            BlockEntity newBlockEntity = world.getBlockEntity(blockPos);
+                        BlockEntity newBlockEntity = world.getBlockEntity(blockPos);
 
-                            if (newBlockEntity instanceof GrayGooBlockEntity newGrayGooBlockEntity) {
-                                newGrayGooBlockEntity.setAllTraits(grayGooBlockEntity.getAllTraits());
-                            }
+                        if (newBlockEntity instanceof GrayGooBlockEntity newGrayGooBlockEntity) {
+                            newGrayGooBlockEntity.setAllTraits(grayGooBlockEntity.getAllTraits());
                         }
                     }
                 }
@@ -159,10 +166,16 @@ public class GrayGooBlock extends Block implements BlockEntityProvider {
                 int randomExplosionChance = random.nextInt(50);
 
                 if (randomExplosionChance == 0) {
-                    world.createExplosion(null, null, null, pos.getX(), pos.getY(), pos.getZ(), 2, true, Explosion.DestructionType.DESTROY);
+                    world.createExplosion(null, DamageSource.GENERIC, null, pos.getX(), pos.getY(), pos.getZ(), 2.0f, true, Explosion.DestructionType.DESTROY);
                 }
             }
         }
+    }
+
+    @Override
+    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        super.onPlaced(world, pos, state, placer, itemStack);
+        world.updateListeners(pos, state, state, Block.NOTIFY_LISTENERS);
     }
 
     @Override
@@ -180,6 +193,7 @@ public class GrayGooBlock extends Block implements BlockEntityProvider {
                 entity.damage(DamageSource.CACTUS, 2);
 
                 if (entity instanceof LivingEntity livingEntity) {
+                    livingEntity.addStatusEffect(new StatusEffectInstance(Objects.requireNonNull(StatusEffect.byRawId(17)), 200));
                     livingEntity.addStatusEffect(new StatusEffectInstance(Objects.requireNonNull(StatusEffect.byRawId(19)), 200));
                 }
             }
@@ -212,6 +226,7 @@ public class GrayGooBlock extends Block implements BlockEntityProvider {
             }
 
             if (grayGooBlockEntity.getTrait("tainted")) {
+                player.addStatusEffect(new StatusEffectInstance(Objects.requireNonNull(StatusEffect.byRawId(17)), 200));
                 player.addStatusEffect(new StatusEffectInstance(Objects.requireNonNull(StatusEffect.byRawId(19)), 200));
             }
         }

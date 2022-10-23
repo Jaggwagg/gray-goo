@@ -16,12 +16,7 @@ import java.util.Arrays;
 import java.util.Locale;
 
 public class GrayGooBlocks {
-    // **** DONT NEED Molecular assembler - Craft nanotechnology parts
-    // **** DONT NEED Nanite assembler - Craft new gray goo blocks
-    // Nanite modifier - Modify existing gray goo blocks
-    // Nanite analyzer - See what modifiers there are
-
-    public static BlockEntityType<GrayGooBlockEntity> GRAY_GOO_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(GrayGoo.MOD_ID, "gray_goo_block_entity"), FabricBlockEntityTypeBuilder.create(GrayGooBlockEntity::new, Blocks.GRAY_GOO.block).build(null));;
+    public static BlockEntityType<GrayGooBlockEntity> GRAY_GOO_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(GrayGoo.MOD_ID, "gray_goo_block_entity"), FabricBlockEntityTypeBuilder.create(GrayGooBlockEntity::new, Blocks.GRAY_GOO.block).build(null));
 
     public static void init() {
         FabricItemSettings gooSettings = new FabricItemSettings().group(GrayGoo.ITEM_GROUP);
@@ -29,8 +24,9 @@ public class GrayGooBlocks {
     }
 
     public enum Blocks {
+        EMP_SWITCH(new EMPSwitchBlock(FabricBlockSettings.of(Material.METAL).strength(2.0f).requiresTool())),
         GRAY_GOO(new GrayGooBlock(FabricBlockSettings.of(Material.METAL).ticksRandomly().breakInstantly())),
-        NANITE_MODIFIER(new NaniteModifierBlock(FabricBlockSettings.of(Material.METAL).strength(3.0f).requiresTool()));
+        NANITE_MODIFIER(new NaniteModifierBlock(FabricBlockSettings.of(Material.METAL).strength(2.0f).requiresTool()));
 
         public final String name;
         public final Block block;

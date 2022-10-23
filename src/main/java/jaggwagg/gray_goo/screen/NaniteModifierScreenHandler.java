@@ -2,8 +2,8 @@ package jaggwagg.gray_goo.screen;
 
 import com.google.common.collect.Lists;
 import java.util.List;
-import java.util.Set;
 
+import jaggwagg.gray_goo.GrayGoo;
 import jaggwagg.gray_goo.block.GrayGooBlocks;
 import jaggwagg.gray_goo.item.GrayGooItems;
 import net.minecraft.entity.player.PlayerEntity;
@@ -127,40 +127,46 @@ public class NaniteModifierScreenHandler extends ScreenHandler {
         }
 
         if (this.input.getStack(0).isOf(GrayGooBlocks.Blocks.GRAY_GOO.block.asItem())) {
-            NbtCompound compound = this.input.getStack(0).getSubNbt("BlockEntityTag");
-            NbtCompound traits;
+            NbtCompound nbt = this.input.getStack(0).getSubNbt("BlockEntityTag");
 
-            if (compound == null) {
-                NbtCompound newCompound = new NbtCompound();
+            if (nbt == null) {
+                int numOfItems = this.input.getStack(0).getCount();
+                NbtCompound newNbt = new NbtCompound();
 
-                newCompound.put("BlockEntityTag", new NbtCompound());
-
-                ItemStack outputStack = new ItemStack(GrayGooBlocks.Blocks.GRAY_GOO.block);
-                outputStack.setNbt(newCompound);
-                this.input.setStack(0, outputStack);
-            } else {
-                traits = compound.getCompound("traits");
-                Set<String> set = traits.getKeys();
+                newNbt.put("BlockEntityTag", new NbtCompound());
 
                 for (GrayGooItems.Traits trait : GrayGooItems.Traits.values()) {
                     String string = trait.toString().toLowerCase();
                     int end = string.indexOf("_");
                     String traitString = string.substring(0, end);
 
-                    if (set.contains(traitString)) {
+                    newNbt.getCompound("BlockEntityTag").putBoolean(traitString, false);
+                }
+
+                newNbt.getCompound("BlockEntityTag").putString("id", GrayGoo.MOD_ID + ":gray_goo_block_entity");
+                newNbt.getCompound("BlockEntityTag").putInt("age", 0);
+                newNbt.getCompound("BlockEntityTag").putInt("growthSize", 2);
+
+                ItemStack outputStack = new ItemStack(GrayGooBlocks.Blocks.GRAY_GOO.block, numOfItems);
+                outputStack.setNbt(newNbt);
+                this.input.setStack(0, outputStack);
+            } else {
+                for (GrayGooItems.Traits trait : GrayGooItems.Traits.values()) {
+                    String string = trait.toString().toLowerCase();
+                    int end = string.indexOf("_");
+                    String traitString = string.substring(0, end);
+
+                    if (nbt.getBoolean(traitString)) {
                         this.availableTraits.add(trait.item);
                     }
 
                     if (this.input.getStack(1).isOf(trait.item)) {
-                        if (!traits.getBoolean(traitString)) {
+                        if (!nbt.getBoolean(traitString)) {
                             ItemStack outputStack = new ItemStack(GrayGooBlocks.Blocks.GRAY_GOO.block);
-                            NbtCompound newCompound = new NbtCompound();
-                            NbtCompound newTraits = new NbtCompound();
-                            newCompound.copyFrom(compound);
-                            newTraits.copyFrom(traits);
-                            newTraits.putBoolean(traitString, true);
-                            newCompound.put("traits", newTraits);
-                            outputStack.setSubNbt("BlockEntityTag", newCompound);
+                            NbtCompound newNbt = new NbtCompound();
+                            newNbt.copyFrom(nbt);
+                            newNbt.putBoolean(traitString, true);
+                            outputStack.setSubNbt("BlockEntityTag", newNbt);
                             this.output.setStack(0, outputStack);
                         }
                     }
@@ -183,9 +189,11 @@ public class NaniteModifierScreenHandler extends ScreenHandler {
     public ItemStack transferSlot(PlayerEntity player, int index) {
         ItemStack itemStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
+
         if (slot.hasStack()) {
             ItemStack itemStack2 = slot.getStack();
             itemStack = itemStack2.copy();
+
             if (index == 2) {
                 if (!this.insertItem(itemStack2, 3, 39, true)) {
                     return ItemStack.EMPTY;

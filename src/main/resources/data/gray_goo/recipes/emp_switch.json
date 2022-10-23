@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "i": {
+      "item": "minecraft:iron_ingot"
+    },
+    "r": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "pattern": [
+    "iri",
+    "iri",
+    "iii"
+  ],
+  "result": {
+    "item": "gray_goo:emp_switch"
+  }
+}

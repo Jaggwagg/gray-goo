@@ -26,7 +26,7 @@ public class NaniteModifierBlock extends Block {
     }
 
     @Override
-    @SuppressWarnings("deprecated")
+    @SuppressWarnings("deprecation")
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
             player.openHandledScreen(createScreenHandlerFactory(state, world, pos));
@@ -37,13 +37,13 @@ public class NaniteModifierBlock extends Block {
     }
 
     @Override
-    @SuppressWarnings("deprecated")
+    @SuppressWarnings("deprecation")
     public NamedScreenHandlerFactory createScreenHandlerFactory(BlockState state, World world, BlockPos pos) {
         return new SimpleNamedScreenHandlerFactory((syncId, inventory, player) -> new NaniteModifierScreenHandler(syncId, inventory, ScreenHandlerContext.create(world, pos)), TITLE);
     }
 
     @Override
-    @SuppressWarnings("deprecated")
+    @SuppressWarnings("deprecation")
     public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
         return false;
     }

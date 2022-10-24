@@ -21,6 +21,7 @@ For setup instructions please see the [fabric wiki page](https://fabricmc.net/wi
 
 ## Contributing
 Contributions will be accepted for bug fixes. Any feature requests should not be a form of contributing.
+Language translation would be much appreciated!
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

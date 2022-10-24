@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "n": {
+      "item": "gray_goo:nanite_trait"
+    },
+    "s": {
+      "item": "gray_goo:molecular_switch"
+    },
+    "r": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "pattern": [
+    " s ",
+    "rnr",
+    " s "
+  ],
+  "result": {
+    "item": "gray_goo:selfdestruct_nanite_trait"
+  }
+}

@@ -1,6 +1,8 @@
 package jaggwagg.gray_goo.screen;
 
 import com.google.common.collect.Lists;
+
+import java.util.Arrays;
 import java.util.List;
 
 import jaggwagg.gray_goo.GrayGoo;
@@ -61,8 +63,8 @@ public class NaniteModifierScreenHandler extends ScreenHandler {
             }
 
             public static boolean matches(ItemStack stack) {
-                for (GrayGooItems.Traits trait : GrayGooItems.Traits.values()) {
-                    if (stack.isOf(trait.item)) {
+                for (GrayGooItems.Traits value : GrayGooItems.Traits.values()) {
+                    if (stack.isOf(value.item)) {
                         return true;
                     }
                 }
@@ -135,13 +137,13 @@ public class NaniteModifierScreenHandler extends ScreenHandler {
 
                 newNbt.put("BlockEntityTag", new NbtCompound());
 
-                for (GrayGooItems.Traits trait : GrayGooItems.Traits.values()) {
-                    String string = trait.toString().toLowerCase();
+                Arrays.stream(GrayGooItems.Traits.values()).forEach(value -> {
+                    String string = value.toString().toLowerCase();
                     int end = string.indexOf("_");
                     String traitString = string.substring(0, end);
 
                     newNbt.getCompound("BlockEntityTag").putBoolean(traitString, false);
-                }
+                });
 
                 newNbt.getCompound("BlockEntityTag").putString("id", GrayGoo.MOD_ID + ":gray_goo_block_entity");
                 newNbt.getCompound("BlockEntityTag").putInt("age", 0);
@@ -151,16 +153,16 @@ public class NaniteModifierScreenHandler extends ScreenHandler {
                 outputStack.setNbt(newNbt);
                 this.input.setStack(0, outputStack);
             } else {
-                for (GrayGooItems.Traits trait : GrayGooItems.Traits.values()) {
-                    String string = trait.toString().toLowerCase();
+                Arrays.stream(GrayGooItems.Traits.values()).forEach(value -> {
+                    String string = value.toString().toLowerCase();
                     int end = string.indexOf("_");
                     String traitString = string.substring(0, end);
 
                     if (nbt.getBoolean(traitString)) {
-                        this.availableTraits.add(trait.item);
+                        this.availableTraits.add(value.item);
                     }
 
-                    if (this.input.getStack(1).isOf(trait.item)) {
+                    if (this.input.getStack(1).isOf(value.item)) {
                         if (!nbt.getBoolean(traitString)) {
                             ItemStack outputStack = new ItemStack(GrayGooBlocks.Blocks.GRAY_GOO.block);
                             NbtCompound newNbt = new NbtCompound();
@@ -170,7 +172,7 @@ public class NaniteModifierScreenHandler extends ScreenHandler {
                             this.output.setStack(0, outputStack);
                         }
                     }
-                }
+                });
             }
         }
     }

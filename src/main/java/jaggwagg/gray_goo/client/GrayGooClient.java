@@ -35,7 +35,7 @@ public class GrayGooClient implements ClientModInitializer {
                         String traitString = string.substring(0, end);
 
                         if (nbt.getBoolean(traitString)) {
-                            color += trait.colorHex;
+                            color += trait.color;
                         }
                     }
                 }
@@ -54,7 +54,7 @@ public class GrayGooClient implements ClientModInitializer {
                     String traitString = string.substring(0, end);
 
                     if (nbt.getBoolean(traitString)) {
-                        color += trait.colorHex;
+                        color += trait.color;
                     }
                 }
             }

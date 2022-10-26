@@ -1,5 +1,6 @@
 package jaggwagg.gray_goo.block;
 
+import jaggwagg.gray_goo.GrayGoo;
 import jaggwagg.gray_goo.block.entity.GrayGooBlockEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
@@ -41,6 +42,10 @@ public class GrayGooBlock extends Block implements BlockEntityProvider {
     public void grow(World world, BlockPos pos) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         ArrayList<BlockPos> positions = this.getGrowableBlocks(world, pos);
+
+        if (!GrayGoo.CONFIG.getAllowGooSpread()) {
+            return;
+        }
 
         if (blockEntity instanceof GrayGooBlockEntity grayGooBlockEntity) {
             HashSet<Block> blocks = new HashSet<>();
@@ -215,6 +220,7 @@ public class GrayGooBlock extends Block implements BlockEntityProvider {
 
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
+
         if (blockEntity instanceof GrayGooBlockEntity grayGooBlockEntity) {
             if (!world.isClient && !player.isCreative() && !world.getBlockState(pos).get(ACTIVATED)) {
                 ItemStack itemStack = new ItemStack(this);

@@ -1,7 +1,9 @@
 package jaggwagg.gray_goo;
 
 import jaggwagg.gray_goo.block.GrayGooBlocks;
+import jaggwagg.gray_goo.config.GrayGooConfig;
 import jaggwagg.gray_goo.item.GrayGooItems;
+import jaggwagg.gray_goo.screen.GrayGooScreenHandlers;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.ItemGroup;
@@ -14,6 +16,8 @@ public class GrayGoo implements ModInitializer {
     public static final String MOD_ID = "gray_goo";
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
+    public static final GrayGooConfig CONFIG = GrayGooConfig.getConfig();
+
     public static final ItemGroup ITEM_GROUP = FabricItemGroupBuilder.build(
             new Identifier(MOD_ID, "general"),
             () -> new ItemStack(GrayGooBlocks.Blocks.GRAY_GOO.block)
@@ -23,6 +27,7 @@ public class GrayGoo implements ModInitializer {
     public void onInitialize() {
         GrayGooBlocks.init();
         GrayGooItems.init();
+        GrayGooScreenHandlers.init();
         LOGGER.info("Successfully initialized!");
     }
 }

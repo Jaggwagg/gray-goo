@@ -1,6 +1,7 @@
 package jaggwagg.gray_goo.block.entity;
 
 import jaggwagg.gray_goo.block.GrayGooBlocks;
+import jaggwagg.gray_goo.item.GrayGooItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -15,10 +16,6 @@ public class GrayGooBlockEntity extends BlockEntity {
     private int age = 0;
     private int growthSize = 2;
     private Map<String, Boolean> traits = new HashMap<>();
-    public static ArrayList<String> traitKeys = new ArrayList<>(List.of(
-            "biological", "broken", "corrupted", "explosive", "fluid",
-            "linear", "rapid", "selfdestruct", "solid", "tainted"
-    ));
 
     public GrayGooBlockEntity(BlockPos pos, BlockState state) {
         super(GrayGooBlocks.GRAY_GOO_BLOCK_ENTITY, pos, state);
@@ -43,7 +40,7 @@ public class GrayGooBlockEntity extends BlockEntity {
     }
 
     public void resetAllTraits() {
-        traitKeys.forEach(key -> this.traits.put(key, false));
+        GrayGooItems.TRAIT_KEYS.forEach(key -> this.traits.put(key, false));
     }
 
     @Override
@@ -52,7 +49,7 @@ public class GrayGooBlockEntity extends BlockEntity {
         age = nbt.getInt("age");
         growthSize = nbt.getInt("growthSize");
 
-        traitKeys.forEach(key -> this.traits.put(key, nbt.getBoolean(key)));
+        GrayGooItems.TRAIT_KEYS.forEach(key -> this.traits.put(key, nbt.getBoolean(key)));
     }
 
     @Override

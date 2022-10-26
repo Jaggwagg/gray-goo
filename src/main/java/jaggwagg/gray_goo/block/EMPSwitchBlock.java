@@ -1,6 +1,8 @@
 package jaggwagg.gray_goo.block;
 
+import jaggwagg.gray_goo.GrayGoo;
 import jaggwagg.gray_goo.block.entity.GrayGooBlockEntity;
+import jaggwagg.gray_goo.item.GrayGooItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -27,23 +29,22 @@ public class EMPSwitchBlock extends Block {
         boolean triggered = state.get(TRIGGERED);
 
         if (powered && !triggered) {
-            world.setBlockState(pos, state.with(TRIGGERED, true), 4);
-
             int posX = pos.getX();
             int posY = pos.getY();
             int posZ = pos.getZ();
+            int length = GrayGoo.CONFIG.getEmpRadius();
 
-            int breadth = 64;
+            world.setBlockState(pos, state.with(TRIGGERED, true), 4);
 
-            for (int x = posX - breadth; x < posX + breadth; x++) {
-                for (int y = posY - breadth; y < posY + breadth; y++) {
-                    for (int z = posZ - breadth; z < posZ + breadth; z++) {
+            for (int x = posX - length; x < posX + length; x++) {
+                for (int y = posY - length; y < posY + length; y++) {
+                    for (int z = posZ - length; z < posZ + length; z++) {
                         BlockPos blockPos = new BlockPos(x, y, z);
                         if (world.getBlockState(blockPos).isOf(GrayGooBlocks.Blocks.GRAY_GOO.block)) {
                             BlockEntity blockEntity = world.getBlockEntity(blockPos);
                             if (blockEntity instanceof GrayGooBlockEntity grayGooBlockEntity) {
                                 Map<String, Boolean> traits = new HashMap<>();
-                                GrayGooBlockEntity.traitKeys.forEach(key -> traits.put(key, false));
+                                GrayGooItems.TRAIT_KEYS.forEach(key -> traits.put(key, false));
                                 traits.put("broken", true);
                                 grayGooBlockEntity.setAllTraits(traits);
                             }

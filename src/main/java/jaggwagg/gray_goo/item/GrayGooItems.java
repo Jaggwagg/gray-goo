@@ -6,13 +6,23 @@ import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
 
 public class GrayGooItems {
+    public static final ArrayList<String> TRAIT_KEYS = new ArrayList<>();
+
     public static void init() {
         Arrays.stream(Items.values()).forEach(value -> registerItem(value.item, value.name));
         Arrays.stream(Traits.values()).forEach(value -> registerItem(value.item, value.name));
+        Arrays.stream(Traits.values()).forEach(value -> {
+            String string = value.toString().toLowerCase();
+            int end = string.indexOf("_");
+            String traitString = string.substring(0, end);
+
+            TRAIT_KEYS.add(traitString);
+        });
     }
 
     public enum Items {
@@ -44,12 +54,12 @@ public class GrayGooItems {
 
         public final String name;
         public final Item item;
-        public final Integer colorHex;
+        public final Integer color;
 
-        <T extends Item> Traits(T item, Integer colorHex) {
+        <T extends Item> Traits(T item, Integer color) {
             this.name = this.toString().toLowerCase(Locale.ROOT);
             this.item = item;
-            this.colorHex = colorHex;
+            this.color = color;
         }
     }
 

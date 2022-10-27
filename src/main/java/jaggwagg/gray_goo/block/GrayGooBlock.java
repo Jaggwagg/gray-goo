@@ -20,10 +20,12 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
@@ -51,22 +53,18 @@ public class GrayGooBlock extends Block implements BlockEntityProvider {
             HashSet<Block> blocks = new HashSet<>();
 
             if (grayGooBlockEntity.getTrait("biological")) {
-                blocks.addAll(Arrays.asList(Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.FARMLAND,
-                        Blocks.OAK_LOG, Blocks.ACACIA_LOG, Blocks.BIRCH_LOG, Blocks.DARK_OAK_LOG, Blocks.JUNGLE_LOG, Blocks.MANGROVE_LOG, Blocks.SPRUCE_LOG,
-                        Blocks.STRIPPED_OAK_LOG, Blocks.STRIPPED_ACACIA_LOG, Blocks.STRIPPED_BIRCH_LOG, Blocks.STRIPPED_DARK_OAK_LOG, Blocks.STRIPPED_JUNGLE_LOG, Blocks.STRIPPED_MANGROVE_LOG, Blocks.STRIPPED_SPRUCE_LOG,
-                        Blocks.OAK_LEAVES, Blocks.ACACIA_LEAVES, Blocks.BIRCH_LEAVES, Blocks.DARK_OAK_LEAVES, Blocks.JUNGLE_LEAVES, Blocks.MANGROVE_LEAVES, Blocks.SPRUCE_LEAVES));
+                GrayGoo.CONFIG.getBiologicalBlocks().forEach(value -> blocks.add(Registry.BLOCK.get(new Identifier(value))));
             }
 
             if (grayGooBlockEntity.getTrait("fluid")) {
-                blocks.addAll(Arrays.asList(Blocks.WATER, Blocks.LAVA, Blocks.KELP, Blocks.KELP_PLANT,
-                        Blocks.SEAGRASS, Blocks.TALL_SEAGRASS, Blocks.SEA_PICKLE, Blocks.BUBBLE_COLUMN));
+                GrayGoo.CONFIG.getFluidBlocks().forEach(value -> {
+                    System.out.println(value);
+                    blocks.add(Registry.BLOCK.get(new Identifier(value)));
+                });
             }
 
             if (grayGooBlockEntity.getTrait("solid")) {
-                blocks.addAll(Arrays.asList(Blocks.SANDSTONE, Blocks.SAND, Blocks.GRAVEL, Blocks.STONE, Blocks.ANDESITE, Blocks.DIORITE, Blocks.GRANITE,
-                        Blocks.DEEPSLATE, Blocks.NETHERRACK, Blocks.BLACKSTONE, Blocks.BASALT, Blocks.TUFF,
-                        Blocks.COPPER_ORE, Blocks.COAL_ORE, Blocks.IRON_ORE, Blocks.GOLD_ORE, Blocks.DIAMOND_ORE, Blocks.REDSTONE_ORE, Blocks.EMERALD_ORE, Blocks.LAPIS_ORE, Blocks.ANCIENT_DEBRIS,
-                        Blocks.DEEPSLATE_COPPER_ORE, Blocks.DEEPSLATE_COAL_ORE, Blocks.DEEPSLATE_IRON_ORE, Blocks.DEEPSLATE_GOLD_ORE, Blocks.DEEPSLATE_DIAMOND_ORE, Blocks.DEEPSLATE_REDSTONE_ORE, Blocks.DEEPSLATE_EMERALD_ORE, Blocks.DEEPSLATE_LAPIS_ORE));
+                GrayGoo.CONFIG.getSolidBlocks().forEach(value -> blocks.add(Registry.BLOCK.get(new Identifier(value))));
             }
 
             if (grayGooBlockEntity.getTrait("selfdestruct")) {

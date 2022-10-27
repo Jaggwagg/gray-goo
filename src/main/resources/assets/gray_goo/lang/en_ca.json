@@ -1,7 +1,7 @@
 {
   "container.gray_goo.nanite_modifier": "Nanite Modifier",
   "block.gray_goo.emp_switch": "EMP Switch",
-  "block.gray_goo.gray_goo": "Gray Goo",
+  "block.gray_goo.gray_goo": "Grey Goo",
   "block.gray_goo.nanite_modifier": "Nanite Modifier",
   "item.gray_goo.molecular_logic_gate": "Molecular Logic Gate",
   "item.gray_goo.molecular_replicator": "Molecular Replicator",
@@ -17,5 +17,5 @@
   "item.gray_goo.selfdestruct_nanite_trait": "Self-Destruct Nanite Trait",
   "item.gray_goo.solid_nanite_trait": "Solid Nanite Trait",
   "item.gray_goo.tainted_nanite_trait": "Tainted Nanite Trait",
-  "itemGroup.gray_goo.general": "Gray Goo"
+  "itemGroup.gray_goo.general": "Grey Goo"
 }
